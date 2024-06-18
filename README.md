@@ -1,5 +1,8 @@
 # Time Snap
 
+![image](https://github.com/RishiSpace/time_snap/assets/104022405/c72526d7-0c22-4fd4-9982-de039b983b3a)
+
+
 ### A python script that'll locally store screenshots of your PC which can then be searched for content (like Windows Recall). This software works on both Windows and Linux
 
 ## Requirements:

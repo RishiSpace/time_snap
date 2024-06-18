@@ -80,7 +80,7 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
 
 root = ctk.CTk()
-root.title("Screenshot Monitor")
+root.title("Time Snap GUI")
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
 # Slider for image navigation

@@ -1,3 +1,40 @@
+import subprocess
+import sys
+import os
+
+# Function to check and install required modules
+def install_required_modules():
+    required_modules = [
+        'pyautogui',
+        'pytesseract',
+        'Pillow',
+        'customtkinter',
+        'spacy',
+        'sqlite3',
+        'threading',
+    ]
+
+    for module in required_modules:
+        try:
+            __import__(module)
+        except ImportError:
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', module])
+
+# Install required modules
+install_required_modules()
+
+# Check if Tesseract is in system environment path
+def is_tesseract_installed():
+    try:
+        subprocess.check_output(['tesseract', '-v'])
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
+
+# If Tesseract is not installed, run the install_tesseract.py script
+if not is_tesseract_installed():
+    subprocess.check_call([sys.executable, 'install_tesseract.py'])
+
 import pyautogui
 import pytesseract
 from PIL import ImageGrab, Image, ImageTk
@@ -6,9 +43,6 @@ from datetime import datetime
 import spacy
 import threading
 import time
-import os
-import re
-import sys
 import sqlite3
 from io import BytesIO
 
@@ -17,8 +51,8 @@ db_path = "screenshot_monitor.db"
 images = []  # Store paths to all screenshots in the form of IDs
 stop_thread = False
 
-# Define OCR engine path
-pytesseract.pytesseract.tesseract_cmd = r"D:\Program Files\Tesseract-OCR\tesseract.exe"  # Update path if needed
+# Define OCR engine path (uncomment this and add path if yours isn't in system path)
+# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"  # Update path if needed
 
 # Load spaCy model for NER
 nlp = spacy.load("en_core_web_sm")
@@ -158,7 +192,6 @@ def search_text(keyword):
         # Handle case where no matches are found
         # For example, display a message or default image
         pass
-
 
 # Initialize the database
 initialize_database()
